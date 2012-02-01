@@ -13,7 +13,7 @@ public class HashTable {
 	private int hash(Object key) {
 		int code = key.hashCode();
 
-		return (int) (code / 2f / Integer.MAX_VALUE * capacity);
+		return (int) (Math.abs(code) / 2f / Integer.MAX_VALUE * capacity);
 	}
 
 	public Object get(String key) {
@@ -92,6 +92,10 @@ public class HashTable {
 		System.out.println(table.get("key"));
 		
 		table.remove("key2");
+		
+		for (int i = 0; i < 120; i++) {
+			table.put("key" + i, i);
+		}
 	}
 
 	private static class Entry {
