@@ -1,16 +1,17 @@
 package algo.data.table.impl;
 
+import java.util.Random;
+
 import algo.data.table.Table;
 
 public class SimpleHashTable implements Table {
 	private int size = 0;
-	private int capacity = 100;
+	private int capacity = 99;
 	private Object[] data = new Object[capacity];
 
 	private int hash(String key) {
 		int code = key.hashCode();
-
-		return (int) (Math.abs(code) / 2f / Integer.MAX_VALUE * capacity);
+		return (int) (Math.abs(Math.cos(code)) * capacity);
 	}
 
 	@Override

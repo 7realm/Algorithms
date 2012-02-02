@@ -36,5 +36,7 @@ public class TableTest {
 		for (int i = 0; i < 120; i++) {
 			table.put("key" + i, i);
 		}
+		
+		
 	}
 }
