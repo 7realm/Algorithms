@@ -1,10 +1,15 @@
-package algo.data;
+package algo.data.table.impl;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class HashTable {
+import org.junit.Assert;
+
+import algo.data.table.Entry;
+import algo.data.table.Table;
+
+public class LinkedHashTable implements Table {
 	private int size = 0;
 	private int capacity = 100;
 	private Integer[] indexes = new Integer[capacity];
@@ -16,6 +21,7 @@ public class HashTable {
 		return (int) (Math.abs(code) / 2f / Integer.MAX_VALUE * capacity);
 	}
 
+	@Override
 	public Object get(String key) {
 		int h = hash(key);
 
@@ -35,10 +41,12 @@ public class HashTable {
 		return null;
 	}
 
+	@Override
 	public int size() {
 		return size;
 	}
 
+	@Override
 	public void put(String key, Object value) {
 		int h = hash(key);
 		Entry entry = new Entry(key, value);
@@ -58,6 +66,7 @@ public class HashTable {
 		size++;
 	}
 
+	@Override
 	public void remove(String key) {
 		int h = hash(key);
 
@@ -69,58 +78,13 @@ public class HashTable {
 				if (key.equals(entry.getKey())) {
 					// found
 					i.remove();
+					size--;
 				}
 			}
-			
+
 			if (list.size() == 0) {
 				data.remove(index);
 			}
-		}
-	}
-
-	public static void main(String[] args) {
-		HashTable table = new HashTable();
-
-		table.put("key1", "value of key1");
-		table.put("key2", "value of key2");
-		table.put("key3", "value of key3");
-
-		System.out.println(table.size());
-		System.out.println(table.get("key1"));
-		System.out.println(table.get("key3"));
-		System.out.println(table.get("key2"));
-		System.out.println(table.get("key"));
-		
-		table.remove("key2");
-		
-		for (int i = 0; i < 120; i++) {
-			table.put("key" + i, i);
-		}
-	}
-
-	private static class Entry {
-		private String key;
-		private Object value;
-
-		public Entry(String key, Object value) {
-			this.key = key;
-			this.value = value;
-		}
-
-		public String getKey() {
-			return key;
-		}
-
-		public void setKey(String key) {
-			this.key = key;
-		}
-
-		public Object getValue() {
-			return value;
-		}
-
-		public void setValue(Object value) {
-			this.value = value;
 		}
 	}
 }
